@@ -11,7 +11,9 @@ public class Juego extends InterfaceJuego
 {
 	// El objeto Entorno que controla el tiempo y otros
 	private Entorno entorno;
-	
+	private Tablero tablero;
+	private Plantas planta;
+	private Zombies zombie;
 	// Variables y métodos propios de cada grupo
 	
 	
@@ -19,7 +21,8 @@ public class Juego extends InterfaceJuego
 	{
 		// Inicializa el objeto entorno
 		this.entorno = new Entorno(this, "Proyecto para TP", 1200, 600);
-		
+		this.tablero = new Tablero(5, 10, 1200, 450, 00, 150, 2);
+		this.planta = new Plantas(60,60,100,70);
 		// Inicializar lo que haga falta para el juego
 
 		// Inicia el juego!
@@ -34,7 +37,8 @@ public class Juego extends InterfaceJuego
 	 */
 	public void tick()
 	{
-		
+		tablero.dibujarTablero(entorno);
+		planta.dibujarPlanta(entorno);
 	}
 	
 

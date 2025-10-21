@@ -5,30 +5,49 @@ import java.awt.Color;
 import entorno.Entorno;
 
 public class Plantas {
-		private int x;
-		private int y;
-		private int diametro;
-		private Color color;
+	private int x;
+	private int y;
+	private int ancho;
+	private int alto;
 		
-		Plantas(int x, int y, int d, Color c){
+		Plantas(int x, int y, int ancho, int alto){
 			this.x=x;
 			this.y=y;
-			this.diametro=d;
-			this.color=c;
+			this.ancho=ancho;
+			this.alto=alto;
 		}
 
-		public void dibujar(Entorno e) {
-			e.dibujarCirculo(x, y, diametro, color);
+		public void dibujarPlanta(Entorno e) {
+			e.dibujarRectangulo(x, y, ancho, alto, 0, Color.GREEN);	
 		}
-		public boolean colisionaConEntornoPorAbajo(Entorno e){
-			return this.y-this.diametro/2 > e.alto();
+		public boolean colisionaConZombie(Zombie p) {
+			if(p==null) {
+				return false;
+			}
+			int bordeIzquierdo=this.x - (this.ancho/2);
+			int bordeDerecho=this.x + (this.ancho/2);
+			int bordeSuperior=this.y - (this.alto/2);
+			int bordeInferior=this.y + (this.alto/2);		
+			
+			int xCercano=Math.max(bordeIzquierdo, Math.min(bordeDerecho,this.x));
+			int yCercano=Math.max(bordeSuperior, Math.min(bordeInferior,this.y));
+			
+			int difX=xCercano-p.getX();
+			int difY=yCercano-p.getY();
+			int distancia=(int) Math.sqrt((difX*difX)+(difY*difY));
+			
+			if(distancia<=p.getDiametro()/2) {
+				return true;
+			}else {
+				return false;
+			}			
 		}
 		
-		public boolean mouseSobreLaBarra(int mouseX, int mouseY) {
-			int bordeIzquierdo=this.x - (this.diametro/2);
-			int bordeDerecho=this.x + (this.diametro/2);
-			int bordeSuperior=this.y - (this.diametro/2);
-			int bordeInferior=this.y + (this.diametro/2);
+		public boolean mouseSobrePlanta(int mouseX, int mouseY) {
+			int bordeIzquierdo=this.x - (this.ancho/2);
+			int bordeDerecho=this.x + (this.ancho/2);
+			int bordeSuperior=this.y - (this.alto/2);
+			int bordeInferior=this.y + (this.alto/2);
 			
 			if(mouseX >= bordeIzquierdo && mouseX<=bordeDerecho &&
 					mouseY >= bordeSuperior && mouseY<= bordeInferior) {
@@ -39,18 +58,12 @@ public class Plantas {
 			}
 		}
 
-		public void moverAbajo() {
-			this.y=this.y+1;
+		public int getX() {
+			return x;
 		}
-		
-		public int getX() {		
-			return this.x;
-		}
-		
-		public void setX(int valor) {
-			if(valor>=0) {
-				this.x=valor;			
-			}
+
+		public void setX(int x) {
+			this.x = x;
 		}
 
 		public int getY() {
@@ -61,20 +74,20 @@ public class Plantas {
 			this.y = y;
 		}
 
-		public int getDiametro() {
-			return diametro;
+		public int getAncho() {
+			return ancho;
 		}
 
-		public void setDiametro(int diametro) {
-			this.diametro = diametro;
+		public void setAncho(int ancho) {
+			this.ancho = ancho;
 		}
 
-		public Color getColor() {
-			return color;
+		public int getAlto() {
+			return alto;
 		}
 
-		public void setColor(Color color) {
-			this.color = color;
+		public void setAlto(int alto) {
+			this.alto = alto;
 		}
-		
+
 }
