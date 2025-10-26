@@ -20,7 +20,7 @@ public class Plantas {
 		public void dibujarPlanta(Entorno e) {
 			e.dibujarRectangulo(x, y, ancho, alto, 0, Color.GREEN);	
 		}
-		public boolean colisionaConZombie(Zombie p) {
+		public boolean colisionaConZombie(Zombies p) {
 			if(p==null) {
 				return false;
 			}
@@ -29,14 +29,14 @@ public class Plantas {
 			int bordeSuperior=this.y - (this.alto/2);
 			int bordeInferior=this.y + (this.alto/2);		
 			
-			int xCercano=Math.max(bordeIzquierdo, Math.min(bordeDerecho,this.x));
-			int yCercano=Math.max(bordeSuperior, Math.min(bordeInferior,this.y));
+			int xCercano=Math.max(bordeIzquierdo, Math.min(bordeDerecho,p.getX()));
+			int yCercano=Math.max(bordeSuperior, Math.min(bordeInferior,p.getY()));
 			
 			int difX=xCercano-p.getX();
 			int difY=yCercano-p.getY();
 			int distancia=(int) Math.sqrt((difX*difX)+(difY*difY));
 			
-			if(distancia<=p.getDiametro()/2) {
+			if(distancia<=p.getAncho()/2) {
 				return true;
 			}else {
 				return false;

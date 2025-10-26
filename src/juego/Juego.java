@@ -23,6 +23,7 @@ public class Juego extends InterfaceJuego
 		this.entorno = new Entorno(this, "Proyecto para TP", 1200, 600);
 		this.tablero = new Tablero(5, 10, 1200, 450, 00, 150, 2);
 		this.planta = new Plantas(60,60,100,70);
+		this.zombie = new Zombies(1205,195,100,70);
 		// Inicializar lo que haga falta para el juego
 
 		// Inicia el juego!
@@ -38,7 +39,22 @@ public class Juego extends InterfaceJuego
 	public void tick()
 	{
 		tablero.dibujarTablero(entorno);
-		planta.dibujarPlanta(entorno);
+		zombie.dibujarZombie(entorno);
+		zombie.moverZombie();
+		
+		if(planta!=null) {
+			this.planta.dibujarPlanta(entorno);			
+		
+		if(entorno.estaPresionado(entorno.BOTON_IZQUIERDO) && planta.mouseSobrePlanta(entorno.mouseX(),entorno.mouseY())) {
+			this.planta.setX(entorno.mouseX());
+			this.planta.setY(entorno.mouseY());
+		
+		}
+
+		if(planta.colisionaConZombie(zombie)) {
+			this.planta=null;
+				}
+		}
 	}
 	
 
