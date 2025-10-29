@@ -38,6 +38,31 @@ public class Tablero {
 				}
 			}
 		}
+		public int getCentroX(int columna) {
+		    int anchoCelda = anchoTotal / columnas;
+		    return inicioX + (columna - 1) * anchoCelda + anchoCelda / 2;
+		}
+		public int getCentroY(int fila) {
+		    int altoCelda = altoTotal / filas;
+		    return inicioY + (fila - 1) * altoCelda + altoCelda / 2;
+		}
+	
+		public int getInicioX() {
+		    return inicioX;
+		}
+
+		public int getInicioY() {
+		    return inicioY;
+		}
+
+		public int getAnchoCelda() {
+		    return anchoTotal / columnas;
+		}
+
+		public int getAltoCelda() {
+		    return altoTotal / filas;
+		}	
+		
 	}
 	
 	

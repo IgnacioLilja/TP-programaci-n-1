@@ -9,17 +9,49 @@ public class Plantas {
 	private int y;
 	private int ancho;
 	private int alto;
+	private boolean disponible;
+	private boolean colocada;
+	private int tiempoCarga;
+	private int cargado;
 		
 		Plantas(int x, int y, int ancho, int alto){
 			this.x=x;
 			this.y=y;
 			this.ancho=ancho;
 			this.alto=alto;
+			this.disponible=true;
+			this.colocada=false;
+			this.tiempoCarga= 0;
+			this.cargado = 300;
 		}
 
 		public void dibujarPlanta(Entorno e) {
 			e.dibujarRectangulo(x, y, ancho, alto, 0, Color.GREEN);	
 		}
+		
+		public boolean plantaDisponible() {
+			return disponible;
+		}
+		
+		public void colocarAvatar(int x, int y) {
+			if (disponible) {
+				this.x = x;
+				this.y = y;
+				this.disponible = false;
+				this.tiempoCarga = 0;
+			}
+		}
+		
+		public void actualizarPlanta() {
+			if (!disponible) {
+				tiempoCarga++;
+				if (tiempoCarga >= cargado) {
+					disponible = true;
+					tiempoCarga= 0;
+				}
+			}
+		}
+		
 		public boolean colisionaConZombie(Zombies p) {
 			if(p==null) {
 				return false;
@@ -56,6 +88,18 @@ public class Plantas {
 			else {
 				return false;			
 			}
+		}
+		public boolean plantaEnCasilla() {
+			return colocada;
+		}
+		public void enCasilla(int x, int y) {
+			this.x=x;
+			this.y=y;
+			colocada=true;
+		}  
+		
+		public boolean estaColocada() {
+			return colocada;
 		}
 
 		public int getX() {

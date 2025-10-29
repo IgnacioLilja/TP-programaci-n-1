@@ -20,7 +20,7 @@ public class Zombies {
 
 		}
 		public void dibujarZombie(Entorno e) {
-			e.dibujarRectangulo(x, y, ancho, alto, 0, Color.BLUE);	
+			e.dibujarRectangulo(x, y, ancho, alto, 0, new Color(60,60,60));	
 		}
 		
 		public void moverZombie() {
